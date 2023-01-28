@@ -1,5 +1,4 @@
-/* Реализуйте алгоритм сортировки пузырьком числового массива, результат после каждой итерации запишите
- в лог-файл.
+/* Реализуйте алгоритм сортировки пузырьком числового массива, результат после каждой итерации запишите в лог-файл.
 */
 import java.io.IOException;
 import java.util.Arrays;
@@ -45,7 +44,6 @@ public class Task2 {
     }
     static void bubbleSortByLogger(int[] numArr){ // 4. Сортировка массива "пузырьком" с добавлением логирования
         myLog("ИСХОДНЫЙ МАССИВ: " + Arrays.toString(numArr));
-        //System.out.println("Исходный массив: ");
         int count = 1;
         for (int i = 1; i < numArr.length; i++) {
             for (int j = 0; j < numArr.length-i; j++) {
