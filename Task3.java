@@ -16,10 +16,11 @@ import java.util.Scanner;
 
 public class Task3 {
     public static void main(String[] args) {
-        createStudentProgressReport(getSplitString(getStringFromFile("Task3.txt")));
+        String fileName = "Task3.txt";
+        createStudentProgressReport(getSplitString(getStringFromFile(fileName)));
     }
-    static String getStringFromFile(String fName) { //получение строки из файла
-        File file = new File(fName);
+    static String getStringFromFile(String fileName) { //получение строки из файла
+        File file = new File(fileName);
         try (Scanner sc = new Scanner(file)) {
             String line = sc.nextLine();
             System.out.println("СТРОКА ИЗ ФАЙЛА: " + line);
@@ -27,7 +28,7 @@ public class Task3 {
         } catch (IOException ex) {
             System.out.println("Файл не найден");
         }
-        return fName;
+        return fileName;
     }
     static String[] getSplitString(String str) { //разбор строки на составные части
         String str1 = str.substring(2, str.length() - 2); //убираем по 2 символа с обеих сторон исходной строки т.е. [{ и }]
@@ -47,7 +48,7 @@ public class Task3 {
         System.out.println();                                                    // для дальнейших манипуляций
         return gradesArray;
     }
-    static String createStudentProgressReport(String[] values) { // создание отчета об успеваемости студентов в требуемом формате
+    static void createStudentProgressReport(String[] values) { // создание отчета об успеваемости студентов в требуемом формате
         int size = values.length;
         StringBuilder sbReport = new StringBuilder();
         for (int i = 0; i < size; i+=3) {
@@ -56,6 +57,5 @@ public class Task3 {
                     append(values[i+2], 1, values[i+2].length()-1).append(".\n");
             }
         System.out.println(sbReport);
-        return sbReport.toString();
     }
 }
