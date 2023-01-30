@@ -18,7 +18,8 @@ import java.util.Scanner;
 
 public class Task1 {
     public static void main(String[] args) {
-        createStringSqlRequest(getSplitString(getStringFromFile("Task1.txt")));
+        String fileName = "Task1.txt";
+        createStringSqlRequest(getSplitString(getStringFromFile(fileName)));
     }
     static String getStringFromFile(String fileName) {
         File file = new File(fileName);
