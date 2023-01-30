@@ -25,6 +25,7 @@ public class Task1 {
         try (Scanner sc = new Scanner(file)) {
             String line = sc.nextLine();
             System.out.println("Строка из файла: " + line);
+            sc.close();
             return line;
         } catch (IOException ex) {
             System.out.println("Файл не найден");
