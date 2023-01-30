@@ -9,9 +9,6 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class Task2 {
-    private static Random random = new Random();
-    private static Scanner input = new Scanner(System.in);
-
     public static void main(String[] args){
         int size = getNumberByUser("Задайте размер массиву чисел: ");
         int start = getNumberByUser("Введите минимальное значение элемента массива: ");
@@ -19,13 +16,15 @@ public class Task2 {
         bubbleSortByLogger(fillNumArrRandom(size, start, end));
     }
     static int getNumberByUser(String text){ // 1. Получение числа от пользолвателя.
+        Scanner input = new Scanner(System.in);
         System.out.print(text);
         return input.nextInt();
     }
     static int[] fillNumArrRandom(int size, int min, int max) { // 2. Заполнение числового масиива рандомно на основе полученных чисел от пользователя
+        Random random = new Random();
         int[] arr = new int[size];
         for (int i = 0; i < size; i++) {
-            arr[i] = random.ints(min,(max+1)).findFirst().getAsInt();
+            arr[i] = random.nextInt(min, max+1);
         }
         return arr;
     }
