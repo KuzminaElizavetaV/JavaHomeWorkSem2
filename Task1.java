@@ -20,8 +20,8 @@ public class Task1 {
     public static void main(String[] args) {
         createStringSqlRequest(getSplitString(getStringFromFile("Task1.txt")));
     }
-    static String getStringFromFile(String fName) {
-        File file = new File(fName);
+    static String getStringFromFile(String fileName) {
+        File file = new File(fileName);
         try (Scanner sc = new Scanner(file)) {
             String line = sc.nextLine();
             System.out.println("Строка из файла: " + line);
@@ -29,36 +29,35 @@ public class Task1 {
         } catch (IOException ex) {
             System.out.println("Файл не найден");
         }
-        return fName;
+        return fileName;
     }
     static String[] getSplitString(String str) {
         String str1 = str.substring(1, str.length() - 1); //"name":"Ivanov", "country":"Russia", "city":"Moscow", "age":"null"
         String[] arrStr = str1.split(", ");//["name":"Ivanov", "country":"Russia", "city":"Moscow", "age":"null"]
-        int size = arrStr.length;
-        ArrayList<String> parametres = new ArrayList<String>(); //ArrayList использую чтобы не заморачиваться с размером массива
-        for (int i = 0; i < size; i++) {                        // также удобно добавлять нужные элементы в массив
-            String[] param = arrStr[i].split(":");
-            if (!param[1].contains("null")) { //если "значение" не равно "null"
-                parametres.add(param[0]); //добавляю уловный "ключ" в ArrayList
-                parametres.add(param[1]); //добавляю условное "значение" в ArrayList
+        ArrayList<String> listKeyValue = new ArrayList<>(); //ArrayList использую чтобы не заморачиваться с размером массива
+        for (String strArr : arrStr) {                     // также удобно добавлять нужные элементы в массив
+            String[] param = strArr.split(":");      //элементы списка будут расположены по типу ключ-значение
+            if (!strArr.contains("null")) { //если "значение" не равно "null"
+                listKeyValue.add(param[0]); //добавляю уловный "ключ" в ArrayList
+                listKeyValue.add(param[1]); //добавляю условное "значение" в ArrayList
             }
         }
-        String[] paramArray = parametres.toArray(new String[0]); //на выходе мне нужен просто массив для дальнейших манипуляций
+        String[] paramArray = listKeyValue.toArray(new String[0]); //на выходе мне нужен просто массив для дальнейших манипуляций
         System.out.println("Массив из разбитой строки: " + Arrays.toString(paramArray));
         return paramArray;
     }
-    static String createStringSqlRequest(String[] values) {
+    static void createStringSqlRequest (String[]values){// создание строки SQL-запроса
         int size = values.length;
         StringBuilder sbSQL = new StringBuilder();
         sbSQL.append("SELECT * FROM students WHERE ");
         int count = 0;
-        for (int i = 0; i < size - 2; i+=2) {
-            sbSQL.append(values[i],1,values[i].length()-1).append(" = ").append(values[i+1]).append(" AND ");
-            count+=2;
-        }
-        sbSQL.append(values[count],1,values[count].length()-1).append(" = ").append(values[count+1]).append(";");
-        System.out.println("SQL-запрос: " + sbSQL);
-        return sbSQL.toString();
+        for (int i = 0; i < size - 2; i += 2) {
+            sbSQL.append(values[i], 1, values[i].length() - 1).append(" = ").append(values[i + 1]).append(" AND ");
+            count += 2;
+            }
+            sbSQL.append(values[count], 1, values[count].length() - 1).append(" = ").append(values[count + 1]).append(";");
+            System.out.println("SQL-запрос: " + sbSQL);
     }
 }
+
 
